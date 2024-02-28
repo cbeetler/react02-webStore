@@ -10,6 +10,8 @@ import StoreFront from "./components/StoreFront.jsx";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // return <StoreFront />;
+
   if (loggedIn) {
     return (
       <>
