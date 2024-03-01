@@ -6,7 +6,7 @@ export default function AddProductForm(props) {
 
   return (
     <>
-      <form onSubmit={props.onFormSubmit}>
+      <form onSubmit={onFormSubmit}>
         <div>
           <label htmlFor="input-name">Name:</label>
           <input
