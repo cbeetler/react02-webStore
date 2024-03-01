@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import Product from "./Product.jsx";
+import ProductsList from "./ProductsList.jsx";
+import AddProductForm from "./AddProductForm.jsx";
 
 export default function StoreFront() {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  function addProduct(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
     setProducts([
       ...products,
@@ -16,64 +17,31 @@ export default function StoreFront() {
     setDescription("");
   }
 
-  function deleteItem(product) {
+  function handleNameChange(newName) {
+    setName(newName);
+  }
+
+  function handleDescriptionChange(newDesc) {
+    setDescription(newDesc);
+  }
+
+  function handleDeleteItem(product) {
     setProducts(products.filter((p) => p.id !== product.id));
   }
 
   return (
     <>
-      <form onSubmit={addProduct}>
-        <div>
-          <label htmlFor="input-name">Name</label>
-          <input
-            id="input-name"
-            type="text"
-            placeholder="Enter the name"
-            className="textfield"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="input-desc">Description</label>
-          <input
-            id="input-desc"
-            type="text"
-            placeholder="Enter the description"
-            className="textfield"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="form-footer">
-          <div className="validation-message">
-            {name === "" ? <p>Please enter a name.</p> : null}
-            {description === "" ? <p>Please enter a description.</p> : null}
-          </div>
-          <input
-            type="submit"
-            className="btn btn-primary"
-            value="Add product"
-            disabled={(name === "") | (description === "")}
-          />
-        </div>
-      </form>
+      <AddProductForm
+        name={name}
+        description={description}
+        onFormSubmit={handleFormSubmit}
+        onNameChange={handleNameChange}
+        onDescriptionChange={handleDescriptionChange}
+      />
       <div>
         <p hidden={products.length > 0}>Add your first product</p>
       </div>
-      <ul className="store-front">
-        {products.map((product) => (
-          <li key={product.id}>
-            <Product details={product} />
-            <button
-              onClick={() => deleteItem(product)}
-              className="btn-outline btn-delete"
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <ProductsList products={products} onDeleteItem={handleDeleteItem} />
     </>
   );
 }
