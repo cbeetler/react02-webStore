@@ -1,9 +1,11 @@
-// packages
+// style
 import "./index.css";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+// packages
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 // components
 import StoreFront from "./components/StoreFront.jsx";
@@ -11,13 +13,12 @@ import StoreFront from "./components/StoreFront.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [random, setRandom] = useState(Math.random());
+  // const [random, setRandom] = useState(Math.random()); // previously used with map
+  const [marker, setMarker] = useState();
 
   // Mapbox token
   mapboxgl.accessToken =
     "pk.eyJ1IjoidnNscWRzaGNiaWlnc291eGtkIiwiYSI6ImNsM3dyZDhvaTBucjkzbGxkM2syYTZpYW4ifQ.UyVIpJDgWM2-ZIufnxMBZQ";
-
-  // return <StoreFront />;
 
   // renders map once
   useEffect(() => {
@@ -28,27 +29,51 @@ function App() {
       zoom: 9,
     });
     // create marker
-    const marker = new mapboxgl.Marker()
+    const mapMarker = new mapboxgl.Marker()
       .setLngLat([12.567898, 55.67583])
       .addTo(map); // add it to the existing map
+    setMarker(mapMarker); // update state of marker to default location
   }, []);
+
+  // store coordinates (related to map)
+  const stores = {
+    central: [12.567898, 55.67583],
+    norrebro: [12.553806, 55.699299],
+    airport: [12.650784, 55.618042],
+  };
+
+  // since useEffect only renders once, this will update the mapMarker set there
+  function handleLocationChange(e) {
+    const location = e.target.value;
+    marker.setLngLat(stores[location]);
+  }
 
   return (
     <>
-      <button
+      {/* <button
         id="re-render"
         // button hidden without below style attributes
         style={{ zIndex: "10", position: "absolute" }}
         onClick={() => setRandom(Math.random())}
       >
         Re-render
-      </button>
+      </button> */}
+      <div className="map-overlay">
+        <h3>Choose store: </h3>
+        <select onChange={handleLocationChange}>
+          <option value="central">Central station</option>
+          <option value="norrebro">Norrebro street</option>
+          <option value="airport">CPH Airport</option>
+        </select>
+      </div>
       {/* for the div, class "mapboxgl-canvas" was necessary in order to work with .CSS */}
       <div id="map" className="mapboxgl-canvas"></div>
     </>
   );
   /* :: end section dedicated to map
-     :: */
+     :: below will never run due to above return */
+
+  // return <StoreFront />;
 
   if (loggedIn) {
     return (
@@ -71,6 +96,7 @@ function App() {
   );
 }
 
+// root creation without map capability
 // createRoot(document.querySelector("#react-root")).render(<App />);
 
 // Do NOT modify the code below
