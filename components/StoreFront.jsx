@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductsList from "./ProductsList.jsx";
 import AddProductForm from "./AddProductForm.jsx";
 
 export default function StoreFront() {
-  const [products, setProducts] = useState([]);
+  // restore products state from local storage
+  const [products, setProducts] = useState(() => {
+    const pValue = localStorage.getItem("products");
+
+    if (pValue) {
+      return JSON.parse(pValue);
+    } else {
+      return [];
+    }
+
+    // gets above done in one line but slightly confusing
+    // JSON.parse(localStorage.getItem("products")) ?? []
+  });
+
+  // other state variables
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  // store products state in local storage
+  // re-renders when products are added, removed, etc.
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products));
+    if (products.length === 0) {
+      document.title = "No products";
+    } else if (products.length === 1) {
+      document.title = "1 product";
+    } else {
+      document.title = `${products.length} products`;
+    }
+  }, [products]);
+
+  // when the form is submitted, add new product to the array
+  // reset initial form values for new submission
   function handleFormSubmit(e) {
     e.preventDefault();
     setProducts([

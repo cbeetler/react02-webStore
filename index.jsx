@@ -16,6 +16,10 @@ function App() {
   // const [random, setRandom] = useState(Math.random()); // previously used with map
   const [marker, setMarker] = useState();
 
+  return <StoreFront />;
+
+  // everything else in <App /> will not run
+
   // Mapbox token
   mapboxgl.accessToken =
     "pk.eyJ1IjoidnNscWRzaGNiaWlnc291eGtkIiwiYSI6ImNsM3dyZDhvaTBucjkzbGxkM2syYTZpYW4ifQ.UyVIpJDgWM2-ZIufnxMBZQ";
@@ -66,14 +70,12 @@ function App() {
           <option value="airport">CPH Airport</option>
         </select>
       </div>
-      {/* for the div, class "mapboxgl-canvas" was necessary in order to work with .CSS */}
+      {/* for the div, class "mapboxgl-canvas" was necessary in order to work with .css */}
       <div id="map" className="mapboxgl-canvas"></div>
     </>
   );
   /* :: end section dedicated to map
      :: below will never run due to above return */
-
-  // return <StoreFront />;
 
   if (loggedIn) {
     return (
@@ -96,9 +98,28 @@ function App() {
   );
 }
 
+// Specific to this project: makes it possible for you to reload the page
+let root = createRoot(document.querySelector("#react-root"));
+const reload = () => {
+  root.unmount();
+  root = createRoot(document.querySelector("#react-root"));
+  console.log("Page reloaded");
+  root.render(
+    // <React.StrictMode>
+    <App />
+    // </React.StrictMode>
+  );
+};
+reload();
+const button = document.createElement("button");
+button.textContent = "Reload page";
+button.addEventListener("click", reload);
+document.body.insertAdjacentElement("afterbegin", button);
+
 // root creation without map capability
 // createRoot(document.querySelector("#react-root")).render(<App />);
 
+/*
 // Do NOT modify the code below
 // Special map loading setup
 // specific to react-tutorial.app
@@ -115,3 +136,4 @@ script.onload = () => {
 };
 
 document.body.appendChild(script);
+*/
