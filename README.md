@@ -1,6 +1,6 @@
 # Web Store
 
-There are multiple iterations of this project, some dedicated to a specific feature or building upon another. Each one (from 6 forward) is stored in its own branch.
+This iteration of the project uses the localStorage API to store product entries as JSON. Now when loading the StoreFront, admin users will be greeted with a list of any previous entries they've submitted.
 
 Loader: Vite
 Packages: React, react-dom, mapbox-gl
