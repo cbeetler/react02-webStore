@@ -20,7 +20,7 @@ export default function Product(props) {
   return (
     <>
       <div className="product">
-        {/* <img width="50" alt="" src={details.image} /> */}
+        <img width="50" alt={details.name} src={details.image} />
         <div className="product-info">
           <h2>{details.name}</h2>
           <p>{details.description}</p>
