@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -18,12 +18,10 @@ export default function useMapboxMap(container) {
       zoom: 9,
     });
     // create marker
-    /*
     const mapMarker = new mapboxgl.Marker()
       .setLngLat([12.567898, 55.67583])
       .addTo(map); // add it to the existing map
     setMarker(mapMarker); // update state of marker to default location
-    */
   }, []);
 
   // store coordinates (related to map)
@@ -36,6 +34,7 @@ export default function useMapboxMap(container) {
   // since useEffect only renders once, this will update the mapMarker set there
   function handleLocationChange(e) {
     const location = e.target.value;
+    console.log(location);
     marker.setLngLat(stores[location]);
   }
 }
