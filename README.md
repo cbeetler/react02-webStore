@@ -1,6 +1,6 @@
 # Web Store
 
-There are multiple iterations of this project, some dedicated to a specific feature or building upon another. The final code for each build (from 6 on) is stored in its own branch.
+This iteration refactors the StoreFront to POST newly entered products to an API endpoint. Products are still stored in local storage and will display an accurate and up to date list when the site is relaunched.
 
 Loader: Vite
 Packages: React, react-dom, mapbox-gl
