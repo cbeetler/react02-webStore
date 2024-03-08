@@ -38,12 +38,30 @@ export default function StoreFront() {
   // reset initial form values for new submission
   function handleFormSubmit(e) {
     e.preventDefault();
-    setProducts([
-      ...products,
-      { id: products.length, name: name, description: description },
-    ]);
-    setName("");
-    setDescription("");
+
+    fetch("https://api.learnjavascript.online/demo/react/admin/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        description: description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          setProducts([
+            ...products,
+            { id: products.length, name: name, description: description },
+          ]);
+          setName("");
+          setDescription("");
+        }
+      })
+      .catch((error) => console.error(error));
   }
 
   function handleNameChange(newName) {
