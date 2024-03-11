@@ -52,7 +52,7 @@ export default function StoreFront() {
         if (data) {
           setProducts([
             ...products,
-            { id: products.length, name: name, description: description },
+            { id: products.length + 1, name: name, description: description },
           ]);
           setName("");
           setDescription("");
