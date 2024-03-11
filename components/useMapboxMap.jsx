@@ -32,6 +32,7 @@ export default function useMapboxMap(container) {
   };
 
   // since useEffect only renders once, this will update the mapMarker set there
+  // this function is inaccessible from the outside and therefore markers will not update
   function handleLocationChange(e) {
     const location = e.target.value;
     console.log(location);

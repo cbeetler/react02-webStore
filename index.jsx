@@ -10,6 +10,7 @@ import { createRoot } from "react-dom/client";
 // components
 import StoreFront from "./components/StoreFront.jsx";
 // import useMapboxMap from "./components/useMapboxMap.jsx";
+// import useFetch from "./components/useFetch.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -17,9 +18,10 @@ function App() {
 
   return <StoreFront />;
 
-  /* the code below is related entirely to the map
+  /* :: the code below is related entirely to the map
 
-  useMapboxMap("map");
+  // untested however this line /may/ support changing the marker
+  const { marker, setMarker, handeLocationChange } = useMapboxMap("map");
 
   return (
     <>
@@ -51,6 +53,7 @@ function App() {
       <div id="map" className="mapboxgl-canvas"></div>
     </>
   );
+
   /* :: end section dedicated to map
      :: below will never run due to above return */
 
