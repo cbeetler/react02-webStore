@@ -1,6 +1,6 @@
 # Web Store
 
-There are multiple iterations of this project, some dedicated to a specific feature or building upon another. The final code for each build (from 6 on) is stored in its own branch.
+This iteration refactored the StoreFront component to get and post products using a custom hook, useFetch, to interact with API endpoints. While items can technically be added, they do not render on screen in this iteration due to having a separate endpoint from where products are initially being fetched.
 
 Loader: Vite
 Packages: React, react-dom, mapbox-gl
