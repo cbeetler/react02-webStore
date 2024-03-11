@@ -43,6 +43,7 @@ export default function StoreFront() {
 
     // API post
     // at the moment this does not work. Products can be added but will not render
+    // was able to get around it in a few less than ideal ways, should learn correct method soon
     // baseURL: https://api.learnjavascript.online/demo/react/admin/
     // endpoint: products
     // covered in React Tutorial, chapter 64
@@ -52,7 +53,7 @@ export default function StoreFront() {
         if (data) {
           setProducts([
             ...products,
-            { id: products.length, name: name, description: description },
+            { id: products.length + 1, name: name, description: description },
           ]);
           setName("");
           setDescription("");
