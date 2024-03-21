@@ -43,6 +43,7 @@ export default function StoreFront() {
 
     // API post
     // at the moment this does not work. Products can be added but will not render
+    // was able to get around it in a few less than ideal ways, probably learn correct way soon
     // baseURL: https://api.learnjavascript.online/demo/react/admin/
     // endpoint: products
     // covered in React Tutorial, chapter 64

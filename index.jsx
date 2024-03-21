@@ -3,7 +3,7 @@ import "./index.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 // packages
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 // import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 
